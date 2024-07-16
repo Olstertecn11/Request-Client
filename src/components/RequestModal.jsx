@@ -16,24 +16,63 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import { useState } from 'react';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
+import PetitionService from '../services/PetitionService';
+import Swal from 'sweetalert2'
 
 const RequestModal = ({ isOpen, onClose }) => {
   const [anonymus, setAnonymus] = useState(true);
+  const emptyPetition = {
+    name: '',
+    email: '',
+    content: ''
+  };
+  const [petition, setPetition] = useState(emptyPetition);
 
   const anonymusChange = (event) => {
     setAnonymus(event.target.checked);
   }
 
 
-  const handleSend = async () => {
-    axios.post("http://localhost:3000/", {
-      "name": "Oliver",
-      "email": "olstertecn597@gmail.com",
-      "petition": "jfkldsajlfkasdklf"
-    }).then((response) => {
-      console.log(response);
+  const sendEmail = () => {
+    emailjs.send(
+      'service_c21k7ks',
+      'template_mso7hle',
+      { from_name: petition.name, from_email: petition.email, message: petition.content },
+      'Z0xX7AfW29CPEZpTU'
+    ).then((result) => {
+      Swal.fire({
+        title: 'Accion ralizada',
+        text: 'Petición enviada correctamente, revisa tu correo',
+        icon: 'success'
+      });
+    }).catch((err) => {
+      console.error("Error: ", err.text);
+      Swal.fire({
+        title: 'Accion denegada',
+        text: 'Error al enviar la peticion',
+        icon: 'error'
+      });
     });
+  }
+
+
+  const handleSend = async () => {
+    onClose();
+    sendEmail();
+    /*const response = await PetitionService.save(petition);
+    if (response.code === 200) {
+      alert("Peticion enviada");
+    }
+    else {
+      alert("Error al enviar la peticion")
+    }*/
+  }
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPetition((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
@@ -54,14 +93,20 @@ const RequestModal = ({ isOpen, onClose }) => {
             <Switch isChecked={anonymus} onChange={anonymusChange} />
           </Flex>
           {!anonymus && (
-            <FormControl>
-              <FormLabel>Nombre</FormLabel>
-              <Input placeholder={'Oliver López'} />
-            </FormControl>
+            <div>
+              <FormControl>
+                <FormLabel color='#3182ce' fontWeight='bold'>Nombre</FormLabel>
+                <Input placeholder={'Oliver López'} name="name" onChange={handleChange} value={petition.name} type='text' />
+              </FormControl>
+              <FormControl className='mt-4'>
+                <FormLabel color='#3182ce' fontWeight='bold'>Correo</FormLabel>
+                <Input placeholder={'juanperez@gmail.com'} name="email" value={petition.email} onChange={handleChange} type='email' />
+              </FormControl>
+            </div>
           )}
           <FormControl mt={4} >
-            <FormLabel color='#3182ce'>Contenido</FormLabel>
-            <Textarea placeholder='Pido al señor por...' bg='gray.200' padding={2} />
+            <FormLabel color='#3182ce' fontWeight='bold'>Contenido</FormLabel>
+            <Textarea placeholder='Pido al señor por...' bg='gray.200' padding={2} name="content" value={petition.content} onChange={handleChange} />
           </FormControl>
         </ModalBody>
 
