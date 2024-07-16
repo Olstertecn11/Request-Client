@@ -1,0 +1,26 @@
+.navbar-blue {
+  padding-left: 4vw;
+  padding-right: 4vw;
+  color: white;
+  background: #002938 !important;
+}
+
+.nav-link,
+.navbar-text {
+  color: white !important;
+  font-weight: 500;
+}
+
+.nav-item {
+  margin: 0vw 1vw;
+}
+
+.nav-item.active {
+  background: white;
+  border-radius: 2vw;
+  padding: 0vw 0.8vw;
+}
+
+.nav-item.active .nav-link {
+  color: #002938 !important;
+}
