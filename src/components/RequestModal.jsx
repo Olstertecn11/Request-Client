@@ -21,7 +21,7 @@ import PetitionService from '../services/PetitionService';
 import Swal from 'sweetalert2'
 
 const RequestModal = ({ isOpen, onClose }) => {
-  const [anonymus, setAnonymus] = useState(true);
+  const [anonymus, setAnonymus] = useState(false);
   const emptyPetition = {
     name: '',
     email: '',
@@ -85,8 +85,7 @@ const RequestModal = ({ isOpen, onClose }) => {
         <ModalCloseButton color='white' />
         <ModalBody pb={6}>
           <Flex align="center" mb={4} justify="flex-end">
-            <FormLabel mb="0">¿Anónimo?</FormLabel>
-            <Switch isChecked={anonymus} onChange={anonymusChange} />
+
           </Flex>
           {!anonymus && (
             <div>
@@ -104,6 +103,8 @@ const RequestModal = ({ isOpen, onClose }) => {
               </FormControl>
             </div>
           )}
+          <FormLabel mt="4">¿Anónimo?</FormLabel>
+          <Switch isChecked={anonymus} onChange={anonymusChange} />
           <FormControl mt={4} >
             <FormLabel color='#3182ce' fontWeight='bold'>Contenido</FormLabel>
             <Textarea placeholder='Pido al señor por...' bg='gray.200' padding={2} name="content" value={petition.content} onChange={handleChange} />
