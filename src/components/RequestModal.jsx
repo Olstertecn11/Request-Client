@@ -16,6 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import { useState } from 'react';
+import { Link } from '@chakra-ui/react';
 import emailjs from '@emailjs/browser';
 import PetitionService from '../services/PetitionService';
 import Swal from 'sweetalert2'
@@ -108,6 +109,9 @@ const RequestModal = ({ isOpen, onClose }) => {
           <FormControl mt={4} >
             <FormLabel color='#3182ce' fontWeight='bold'>Contenido</FormLabel>
             <Textarea placeholder='Pido al señor por...' bg='gray.200' padding={2} name="content" value={petition.content} onChange={handleChange} />
+            <Link color='green.500' href='#' float='right' mt={2} textDecoration='underline' fontSize={12} >
+              Términos & Condiciones
+            </Link>
           </FormControl>
         </ModalBody>
 
@@ -118,7 +122,7 @@ const RequestModal = ({ isOpen, onClose }) => {
           <Button onClick={onClose}>Cancelar</Button>
         </ModalFooter>
       </ModalContent>
-    </Modal>
+    </Modal >
   );
 }
 
