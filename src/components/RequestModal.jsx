@@ -25,6 +25,7 @@ const RequestModal = ({ isOpen, onClose }) => {
   const emptyPetition = {
     name: '',
     email: '',
+    phone: '',
     content: ''
   };
   const [petition, setPetition] = useState(emptyPetition);
@@ -60,13 +61,8 @@ const RequestModal = ({ isOpen, onClose }) => {
   const handleSend = async () => {
     onClose();
     sendEmail();
-    /*const response = await PetitionService.save(petition);
-    if (response.code === 200) {
-      alert("Peticion enviada");
-    }
-    else {
-      alert("Error al enviar la peticion")
-    }*/
+    const response = await PetitionService.save(petition);
+    console.log(response);
   }
 
 
@@ -101,6 +97,10 @@ const RequestModal = ({ isOpen, onClose }) => {
               <FormControl className='mt-4'>
                 <FormLabel color='#3182ce' fontWeight='bold'>Correo</FormLabel>
                 <Input placeholder={'juanperez@gmail.com'} name="email" value={petition.email} onChange={handleChange} type='email' />
+              </FormControl>
+              <FormControl className='mt-4'>
+                <FormLabel color='#3182ce' fontWeight='bold'>Teléfono</FormLabel>
+                <Input placeholder={'59621085'} name="phone" value={petition.phone} onChange={handleChange} type='text' />
               </FormControl>
             </div>
           )}
