@@ -15,7 +15,7 @@ import {
 import RequestModal from '../components/RequestModal'
 
 
-const PrayerRequest = () => {
+const Ayuda = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleClick = () => {
@@ -24,6 +24,7 @@ const PrayerRequest = () => {
 
   return (
     <div>
+
       <Container maxW={'7xl'}>
         <Stack
           align={'center'}
@@ -123,4 +124,5 @@ const PrayerRequest = () => {
 }
 
 
-export default PrayerRequest;
+export default Ayuda;
+
