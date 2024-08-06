@@ -1,6 +1,8 @@
 import PrayerRequest from "./sections/PrayerRequest";
 import AdminDashboard from "./sections/AdminDashboard";
-import Navbar from "./components/Navbar"
+import Ayuda from "./pages/Ayuda";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { ChakraProvider } from "@chakra-ui/react"
@@ -10,12 +12,13 @@ import { ChakraProvider } from "@chakra-ui/react"
 function App() {
   return (
     <>
-      <Navbar />
       <ChakraProvider>
         <BrowserRouter>
+          <Navbar />
           <Routes>
-            <Route path="/" element={<PrayerRequest />} />
+            <Route path="/" element={<Home />} />
             <Route path="/app/admin" element={<AdminDashboard />} />
+            <Route path="/Ayuda" element={<Ayuda />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
