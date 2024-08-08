@@ -1,7 +1,7 @@
-import img1 from '../assets/images/nosotros_img1.jpg'
-import img2 from '../assets/images/nosotros_img2.jpg'
-import img3 from '../assets/images/nosotros_img3.jpg'
-import '../assets/styles/Nosotros.css';
+import img1 from '../../assets/images/nosotros_img1.jpg'
+import img2 from '../../assets/images/nosotros_img2.jpg'
+import img3 from '../../assets/images/nosotros_img3.jpg'
+import '../../assets/styles/Nosotros.css';
 
 
 

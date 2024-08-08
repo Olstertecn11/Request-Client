@@ -2,10 +2,10 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/Home.css';
-import img_s1 from '../assets/images/slider_1.jpg'
-import img_s2 from '../assets/images/slider_2.jpg'
-import img_s3 from '../assets/images/slider_3.jpg'
+import '../../styles/Home.css'
+import img_s1 from '../../assets/images/slider_1.jpg'
+import img_s2 from '../../assets/images/slider_2.jpg'
+import img_s3 from '../../assets/images/slider_3.jpg'
 
 const Home = () => {
   return (
