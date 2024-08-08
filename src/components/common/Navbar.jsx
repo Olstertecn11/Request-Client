@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import logo from '../../assets/images/adventist_logo.webp';
 import '../../assets/styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 const links = [
   { title: 'Inicio', path: '/' },
-  { title: 'Ayuda', path: '/Ayuda' },
   {
     title: 'Informacion', childs: [
       { title: 'Nosotros', path: '/Nosotros' },
       { title: 'Ministerios', path: '/Ministerios' }
     ]
-  }
+  },
+  { title: 'Ayuda', path: '/Ayuda' },
 ];
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState({ path: '/', parent: null });
+  const dropdownRef = useRef(null);
 
   const redirect = (path, parent = null) => {
     setActive({ path, parent });
     navigate(path);
+
+    // Cierra el menú desplegable si está abierto
+    if (dropdownRef.current && dropdownRef.current.classList.contains('show')) {
+      dropdownRef.current.classList.remove('show');
+    }
   };
 
   return (
@@ -42,7 +48,7 @@ const Navbar = () => {
                     <a className={`nav-link dropdown-toggle ${active.parent === link.title ? '_active' : ''}`} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {link.title}
                     </a>
-                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown" ref={dropdownRef}>
                       {link.childs.map((child, childIndex) => (
                         <li key={childIndex}>
                           <a className={`dropdown-item ${active.path === child.path ? '_active' : ''}`} onClick={() => redirect(child.path, link.title)}>
