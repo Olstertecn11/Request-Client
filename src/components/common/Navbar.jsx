@@ -39,13 +39,13 @@ const Navbar = () => {
               if (link.childs) {
                 return (
                   <li key={index} className="nav-item dropdown">
-                    <a className={`nav-link dropdown-toggle ${active.parent === link.title ? 'active' : ''}`} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a className={`nav-link dropdown-toggle ${active.parent === link.title ? '_active' : ''}`} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {link.title}
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                       {link.childs.map((child, childIndex) => (
                         <li key={childIndex}>
-                          <a className={`dropdown-item ${active.path === child.path ? 'active' : ''}`} onClick={() => redirect(child.path, link.title)}>
+                          <a className={`dropdown-item ${active.path === child.path ? '_active' : ''}`} onClick={() => redirect(child.path, link.title)}>
                             {child.title}
                           </a>
                         </li>
@@ -55,7 +55,7 @@ const Navbar = () => {
                 );
               } else {
                 return (
-                  <li key={index} className={`nav-item ${active.path === link.path ? 'active' : ''}`}>
+                  <li key={index} className={`nav-item ${active.path === link.path ? '_active' : ''}`}>
                     <a className="nav-link" onClick={() => redirect(link.path)}>
                       {link.title}
                       {active.path === link.path && <span className="sr-only">(current)</span>}

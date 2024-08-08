@@ -18,7 +18,7 @@ import {
 import { useState } from 'react';
 import { Link } from '@chakra-ui/react';
 import emailjs from '@emailjs/browser';
-import PetitionService from '../services/PetitionService';
+import PetitionService from '../../services/PetitionService';
 import Swal from 'sweetalert2'
 
 const RequestModal = ({ isOpen, onClose }) => {
