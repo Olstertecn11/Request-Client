@@ -26,13 +26,13 @@ const Footer = () => {
               <div className="row">
                 <div className="col-md-12 mx-auto footer-form">
                   <input type="text" className="form-control" placeholder='juanhernandez@gmail.com' />
-                  <button className='btn btn-primary'>Enviar <i className="fa-solid fa-paper-plane"></i> </button>
+                  <button className='btn btn-footer'>Enviar <i className="fa-solid fa-paper-plane"></i> </button>
                 </div>
               </div>
               <div className="row mt-4">
                 <small className='text-secondary text-center'>Escribe tu correo y así podremos comunicarnos contigo...</small>
                 <hr className='footer-separator' />
-
+                <small className='text-secondary text-center'>11 Calle, Zona 1, Guatemala, Guatemala</small>
               </div>
             </div>
           </div>

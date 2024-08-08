@@ -32,6 +32,16 @@
 
 .footer-form .btn {
   margin-left: 1rem;
+  background: #002331 !important;
+  color: white !important;
+  border: 1px solid gray !important;
+}
+
+
+
+.footer-form .btn:hover {
+  background: white !important;
+  color: #002331 !important;
 }
 
 .footer-separator {
