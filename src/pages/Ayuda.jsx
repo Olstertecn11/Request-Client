@@ -12,7 +12,7 @@ import {
   useDisclosure,
   useColorModeValue,
 } from '@chakra-ui/react'
-import RequestModal from '../components/RequestModal'
+import RequestModal from '../components/client/RequestModal';
 
 
 const Ayuda = () => {
