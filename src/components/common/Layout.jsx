@@ -1,9 +1,9 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
-const Layout = ({ page }) => {
+const Layout = ({ page, type }) => {
   return (
     <>
-      <Navbar />
+      <Navbar isAdmin={type == 'admin'} />
       {page}
       <Footer />
     </>

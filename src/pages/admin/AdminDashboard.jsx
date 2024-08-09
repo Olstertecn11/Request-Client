@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PetitionService from "../../services/PetitionService";
-import { Card, CardHeader, Heading, StackDivider, CardBody, SimpleGrid, Button, Box } from "@chakra-ui/react";
+import { Card, CardHeader, Heading, CardBody, SimpleGrid, Button, Box, Text } from "@chakra-ui/react";
 import PetitionCard from "../../components/admin/PetitionCard";
 
 const AdminDashboard = () => {
@@ -30,40 +30,44 @@ const AdminDashboard = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12 mx-auto">
-          <div className="row">
-            <Card className="m-4">
-              <CardHeader>
-                <Heading size='md'>Peticiones</Heading>
-              </CardHeader>
-              <CardBody>
-                <SimpleGrid columns={[1, 2, 3]} spacing='4'>
-                  {currentItems && currentItems.length !== 0 ? (
-                    currentItems.map((item, index) => (
-                      <PetitionCard key={index} name={item.nombre} description={item.contenido} date={item.fecha} />
-                    ))
-                  ) : ''}
-                </SimpleGrid>
-                <Box mt={4} display="flex" justifyContent="center">
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <Button
-                      key={index + 1}
-                      onClick={() => paginate(index + 1)}
-                      isActive={currentPage === index + 1}
-                      mx={1}
-                    >
-                      {index + 1}
-                    </Button>
-                  ))}
-                </Box>
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Box className="container" p={6}>
+      <Box className="row">
+        <Box className="col-md-12 mx-auto">
+          <Card m={4} boxShadow="xl" borderRadius="lg">
+            <CardHeader bg="teal.500" borderRadius={0} p={4}>
+              <Heading size='lg' color="white">Peticiones</Heading>
+            </CardHeader>
+            <CardBody p={6}>
+              <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+                {currentItems && currentItems.length !== 0 ? (
+                  currentItems.map((item, index) => (
+                    <PetitionCard key={index} name={item.nombre} description={item.contenido} date={item.fecha} />
+                  ))
+                ) : (
+                  <Text>No hay peticiones disponibles</Text>
+                )}
+              </SimpleGrid>
+              <Box mt={8} display="flex" justifyContent="center">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <Button
+                    key={index + 1}
+                    onClick={() => paginate(index + 1)}
+                    isActive={currentPage === index + 1}
+                    bg={currentPage === index + 1 ? "teal.500" : "gray.200"}
+                    color={currentPage === index + 1 ? "white" : "black"}
+                    _hover={{ bg: currentPage === index + 1 ? "teal.600" : "gray.300" }}
+                    mx={2}
+                    borderRadius="full"
+                  >
+                    {index + 1}
+                  </Button>
+                ))}
+              </Box>
+            </CardBody>
+          </Card>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

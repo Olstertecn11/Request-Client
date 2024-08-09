@@ -7,4 +7,5 @@
 
 .petition-card {
   transition: .25s;
+  border-bottom: 2px solid black;
 }

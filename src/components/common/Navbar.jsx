@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import logo from '../../assets/images/adventist_logo.webp';
 import '../../assets/styles/Navbar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
 const links = [
   { title: 'Inicio', path: '/' },
@@ -14,7 +15,8 @@ const links = [
   { title: 'Ayuda', path: '/Ayuda' },
 ];
 
-const Navbar = () => {
+const Navbar = ({ isAdmin = false }) => {
+  let location = useLocation();
   const navigate = useNavigate();
   const [active, setActive] = useState({ path: '/', parent: null });
   const dropdownRef = useRef(null);
@@ -40,7 +42,7 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mx-auto">
-            {links.map((link, index) => {
+            {!isAdmin ? links.map((link, index) => {
               if (link.childs) {
                 return (
                   <li key={index} className="nav-item dropdown">
@@ -68,8 +70,18 @@ const Navbar = () => {
                   </li>
                 );
               }
-            })}
+            }) : null
+            }
           </ul>
+          {isAdmin && (
+            <div className="ml-auto pr-4">
+              {
+                location.pathname !== "/admin" ? (
+                  <Button colorScheme='red' onClick={() => navigate('/admin')}><i class="fa-solid fa-right-from-bracket"></i></Button>
+                ) : ''
+              }
+            </div>
+          )}
         </div>
       </nav>
     </div>

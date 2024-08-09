@@ -14,14 +14,13 @@ const RouterManager = () => {
         <Routes>
           {userRoutes.map((entry, index) => {
             return (
-              <Route key={index} path={entry.path} element={<Layout page={<entry.page />} />} />
+              <Route key={index} path={entry.path} element={<Layout page={<entry.page />} type="client" />} />
             )
           })
           }
-
           {adminRoutes.map((entry, index) => {
             return (
-              <Route key={index} path={entry.path} element={<Layout page={<entry.page />} />} />
+              <Route key={index} path={entry.path} element={<Layout type="admin" page={<entry.page />} />} />
             )
           })
           }
