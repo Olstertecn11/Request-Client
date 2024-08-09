@@ -1,8 +1,9 @@
 import { Card, Button, Heading, Text, CardBody } from '@chakra-ui/react'
+import '../../assets/styles/PetitionCard.css';
 
 const PetitionCard = ({ name, description, date }) => {
   return (
-    <Card variant='elevated' size='sm' height={'auto'} >
+    <Card variant='elevated' size='sm' height={'auto'} className='petition-card' >
       <CardBody padding={4}>
         <Heading size='md'> {name}</Heading>
         <Text>{description}</Text>

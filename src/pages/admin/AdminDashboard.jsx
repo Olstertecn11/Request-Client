@@ -23,6 +23,9 @@ const AdminDashboard = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Calcular el número total de páginas
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
   // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -44,8 +47,16 @@ const AdminDashboard = () => {
                   ) : ''}
                 </SimpleGrid>
                 <Box mt={4} display="flex" justifyContent="center">
-                  <Button onClick={() => paginate(currentPage - 1)} isDisabled={currentPage === 1}>Anterior</Button>
-                  <Button onClick={() => paginate(currentPage + 1)} ml={2} isDisabled={indexOfLastItem >= data.length}>Siguiente</Button>
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <Button
+                      key={index + 1}
+                      onClick={() => paginate(index + 1)}
+                      isActive={currentPage === index + 1}
+                      mx={1}
+                    >
+                      {index + 1}
+                    </Button>
+                  ))}
                 </Box>
               </CardBody>
             </Card>
