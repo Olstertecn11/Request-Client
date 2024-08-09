@@ -4,6 +4,7 @@ import Loader from '../components/common/Loader';
 import Layout from '../components/common/Layout';
 import userRoutes from './userRoutes';
 import adminRoutes from './adminRoutes';
+import NotFound from '../pages/common/NotFound';
 
 const RouterManager = () => {
 
@@ -20,10 +21,11 @@ const RouterManager = () => {
 
           {adminRoutes.map((entry, index) => {
             return (
-              <Route key={index} path={entry.path} element={<entry.page />} />
+              <Route key={index} path={entry.path} element={<Layout page={<entry.page />} />} />
             )
           })
           }
+          <Route key={'12k'} path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -1,14 +1,16 @@
 import '../../assets/styles/Login.css'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
 
 
   const empty_user = { username: '', password: '' };
   const [user, setUser] = useState(empty_user);
+  const history = useNavigate();
 
   const handleLogin = () => {
     if (user.username === "admin" && user.password === "iasdcentral") {
-      alert("fjdsaj");
+      history('/admin/dashboard');
     }
     else {
       alert("Credenciales Incorrectas");

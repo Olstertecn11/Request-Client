@@ -23,7 +23,6 @@ const Navbar = () => {
     setActive({ path, parent });
     navigate(path);
 
-    // Cierra el menú desplegable si está abierto
     if (dropdownRef.current && dropdownRef.current.classList.contains('show')) {
       dropdownRef.current.classList.remove('show');
     }

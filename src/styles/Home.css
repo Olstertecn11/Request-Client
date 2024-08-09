@@ -87,8 +87,76 @@
 .btn-prim {
   background: #002938;
   color: white;
+  border: 2px solid white;
+  transition: .35s;
+}
+
+.btn-prim:hover {
+  background: white;
+  color: #002938;
+  font-weight: bold;
+  transition: .35s;
+  border: 2px solid #002938;
 }
 
 .info-cards-row .col-md-4 .card h3 {
   color: #002938;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.versiculo-header {
+  height: 10vh;
+  border: 1.4px solid #002938;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.versiculo-header p {
+  font-weight: bold;
+  color: black;
+}
+
+.versiculo-container {
+  margin-top: 8rem;
+  font-size: 1.2rem;
+}
+
+.row.versiculo {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.row.versiculo>.col-md-8 p {
+  color: black;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.anuncios-home-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 4rem;
+}
+
+.anuncios-home-row>.col-md-3 {
+  height: 35vh !important;
+  padding: 0 !important;
+}
+
+.anuncios-home-row>.col-md-3>img {
+  margin: 0;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.anuncios-home-row>.col-md-3>p {
+  font-size: 0.8rem;
 }
