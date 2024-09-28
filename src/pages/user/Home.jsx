@@ -47,25 +47,81 @@ const Home = () => {
               <div className="col-md-4">
                 <div className="card">
                   <h3> <i className="fas fa-map-marker-alt"></i> Localizacion</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, perspiciatis blanditiis. Veritatis qui deleniti, earum exercitationem voluptatem minus facilis, fugiat blanditiis harum nobis eius, repellendus quisquam necessitatibus distinctio nam modi?</p>
+                  <p>
+                    Nuestra iglesia se encuentra en la zona 1, específicamente en la 17 Avenida "A" 7-52. Esta ubicación está en el centro histórico de la ciudad, cerca de varios puntos de interés cultural y comercial. Si necesitas más información o detalles adicionales, te recomendaría contactar directamente a la iglesia.
+                  </p>
                   <button className="btn btn-prim">Ir</button>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="card">
                   <h3> <i className="fas fa-calendar-alt"></i> Horarios</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, perspiciatis blanditiis. Veritatis qui deleniti, earum exercitationem voluptatem minus facilis, fugiat blanditiis harum nobis eius, repellendus quisquam necessitatibus distinctio nam modi?</p>
+                  <p>
+                    Generalmente, las reuniones y servicios se llevan a cabo los sábados, comenzando con la Escuela Sabática a las 9:00 a.m., seguida del culto divino a las 11:00 a.m. Sin embargo, es recomendable contactar directamente a la iglesia para confirmar horarios específicos.
+                  </p>
                   <button className="btn btn-prim">Ver</button>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="card">
                   <h3> <i className="fas fa-users"></i> Actividades</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, perspiciatis blanditiis. Veritatis qui deleniti, earum exercitationem voluptatem minus facilis, fugiat blanditiis harum nobis eius, repellendus quisquam necessitatibus distinctio nam modi?</p>
+                  <p>
+                    La iglesia ofrece diversas actividades para su comunidad. Estas incluyen servicios religiosos, grupos de estudio bíblico, programas para jóvenes, y actividades de servicio comunitario. Además, se celebran eventos especiales como semanas de oración y seminarios sobre salud y familia.
+                  </p>
                   <button className="btn btn-prim">Ver</button>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mb-4 versiculo-container">
+        <div className="row">
+          <div className="col-md-8 mx-auto">
+            <div className="versiculo-header">
+              <p >
+                VERSICULO DEL DÍA
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="row versiculo">
+          <div className="col-md-8 mx-auto">
+            <p className="text-center">
+              "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia."
+              <br />
+              <b>Isaías 41:10</b>
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div className="container mb-4 mt-4">
+        <div className="row">
+          <div className="col-md-8 mx-auto">
+            <div className="versiculo-header">
+              <p >
+                ANUNCIOS IMPORTANTES
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="row anuncios-home-row">
+          <div className="col-md-3 card card-body p-0">
+            <img src="https://files.adventistas.org/noticias/es/2022/07/01095800/AME_100112468_20220611_TOR7983-lpr-960x540.jpg" alt="" />
+            <p className="text-center mt-3">Reflexiones Nuevas Cada Día</p>
+          </div>
+          <div className="col-md-3 card card-body p-0">
+            <img src="https://img.freepik.com/fotos-premium/camarografo-profesional-cubriendo-evento-video_48710-132.jpg" alt="" />
+            <p className="text-center mt-3">
+              Transmiciones En Vivo Todos Los <b>Sábados 9 AM - 1 PM</b>
+            </p>
+          </div>
+          <div className="col-md-3 card card-body p-6">
+            <img src="https://st2.depositphotos.com/1105977/10217/i/450/depositphotos_102172374-stock-photo-drone-silhouette-flying-in-sunset.jpg" alt="" />
+            <p className="text-center mt-3">
+              Día de Reposo Fuera del Templo y En La Naturaleza <b>20 Julio</b>
+            </p>
           </div>
         </div>
       </div>
