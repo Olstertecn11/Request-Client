@@ -77,7 +77,7 @@ const Navbar = ({ isAdmin = false }) => {
             <div className="ml-auto pr-4">
               {
                 location.pathname !== "/admin" ? (
-                  <Button colorScheme='red' onClick={() => navigate('/admin')}><i class="fa-solid fa-right-from-bracket"></i></Button>
+                  <Button colorScheme='red' onClick={() => navigate('/admin')}><i className="fa-solid fa-right-from-bracket"></i></Button>
                 ) : ''
               }
             </div>
