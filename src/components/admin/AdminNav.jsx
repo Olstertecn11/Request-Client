@@ -57,6 +57,7 @@ export default function AdminNav({ toggleSidebar, isSidebarOpen }) {
     // }
     //
     // history('/admin');
+    history('/admin')
   };
 
   const getColor = (route) => {

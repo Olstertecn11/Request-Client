@@ -31,14 +31,17 @@ const AdminLayout = ({ children }) => {
     // }
     setIsLogged(true);
     setIsChecking(false);
-    console.log(location.pathname);
   }, [history]);
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  if (location.pathname === '/admin/') {
+  if (location.pathname === '/admin/' || location.pathname === '/admin') {
     return (
       <div>
         {children}
@@ -51,11 +54,11 @@ const AdminLayout = ({ children }) => {
       <Loader isLoading={isChecking} message="Verificando autenticación..." />
       {!isChecking && isLogged && (
         <Flex>
-          {isSidebarOpen && (
+          {isSidebarOpen && location.pathname !== '/admin' ? (
             <Box w="250px" h="100vh" position="fixed">
               <Sidebar toggleSidebar={toggleSidebar} />
             </Box>
-          )}
+          ) : ''}
 
           <Box
             flex="1"
