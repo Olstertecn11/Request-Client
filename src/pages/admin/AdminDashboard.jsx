@@ -72,6 +72,7 @@ const AdminDashboard = () => {
   const fetch = async () => {
     setIsLoading(true);
     const response = await PetitionService.all();
+    console.log(response);
     const today = new Date(selectedDate);
     const eightDaysAgo = new Date(today);
     eightDaysAgo.setDate(today.getDate() - 8);
