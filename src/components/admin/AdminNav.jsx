@@ -142,8 +142,8 @@ export default function AdminNav({ toggleSidebar, isSidebarOpen }) {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem onClick={() => history('/admin/Profile')}>Configuración</MenuItem>
-                  <MenuItem onClick={closeSession}>Salir</MenuItem>
+                  <MenuItem bg={'#6d50508f'} _hover={{ bg: '#a076768f' }} onClick={() => history('/admin/Profile')}>Configuración</MenuItem>
+                  <MenuItem bg={'#6d50508f'} _hover={{ bg: '#a076768f' }} onClick={closeSession}>Salir</MenuItem>
                 </MenuList>
               </Menu>
             </Stack>
