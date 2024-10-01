@@ -147,6 +147,19 @@ const AdminDashboard = () => {
     }
   }
 
+  const generateVoice = () => {
+    const _str_final = `Deseamos que como hermanos en cristo podamos tener en cuenta estas peticiones y asi poder orar por nuestros hermanos, 
+    que Dios les bendiga, feliz sábado`;
+    const petitions = recentData.map(item => `${item.nombre} tiene la siguiente peticion ${item.contenido}`).join(', ') + _str_final;
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(petitions);
+      utterance.lang = 'es-ES';
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Lo siento, tu navegador no soporta la síntesis de voz.');
+    }
+  }
+
 
   function extraerJSONDelTexto(textoPlano) {
     const jsonStart = textoPlano.indexOf('{');
@@ -273,7 +286,8 @@ const AdminDashboard = () => {
                   <Button bg="yellow.600" _hover={{ bg: 'yellow.500' }} color='white' mt={4} onClick={createWeek}>Generar Semana</Button> : ''
                 }
                 <Button bg="blue.100" mt={4} onClick={changeStatus}>Peticiones Atendidas</Button>
-                <Button bg="green.400" color='white' mt={4} onClick={makePetitionsString}>Realizar Análisis</Button>
+                <Button bg="green.400" color='white' _hover={{ bg: 'green.600', color: 'white' }} mt={4} onClick={makePetitionsString}>Realizar Análisis</Button>
+                <Button bg="teal.400" color='white' _hover={{ bg: 'teal.600', color: 'white' }} mt={4} onClick={generateVoice}>Leer Peticiones</Button>
               </Stack>
 
               <Box position='relative' padding='10'>

@@ -163,7 +163,7 @@
 
 
 .info-cards-row>.col-md-4>.card {
-  height: 22rem !important;
+  height: 100%;
 }
 
 .btn-prim {
