@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from "react";
-import { Icon, useToast, Tag, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, Box, Text, Input, Flex, Stack, Divider, AbsoluteCenter, useDisclosure } from "@chakra-ui/react";
+import { Icon, Image, useToast, Tag, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, Box, Text, Input, Flex, Stack, Divider, AbsoluteCenter, useDisclosure } from "@chakra-ui/react";
 import PetitionCard from "../../components/admin/PetitionCard";
 import Loader from "../../components/common/Loader";
 import PetitionService from "../../services/PetitionService";
 import SemanaService from "../../services/SemanaService";
+import NewsService from "../../services/news";
 import axios from "axios";
 import {
   Modal,
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
     return today;
   });
 
-  const initialState = { title: 'La salud', content: 'Beneficios del ejercicio', conclution: 'El ejercicio ayuda a la salud' };
+  const initialState = { title: 'La salud', content: 'Beneficios del ejercicio', conclution: 'El ejercicio ayuda a la salud', image: false };
   const [modalContent, setModaContent] = useState(initialState);
 
 
@@ -77,7 +78,6 @@ const AdminDashboard = () => {
   const fetch = async () => {
     setIsLoading(true);
     const response = await PetitionService.all();
-    console.log(response);
     const today = new Date(selectedDate);
     const eightDaysAgo = new Date(today);
     eightDaysAgo.setDate(today.getDate() - 8);
@@ -104,11 +104,13 @@ const AdminDashboard = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    // makeChatGptRequest();
-    // if (recentData.length > 0) {
-    // }
-    console.log(modalContent);
-  }, []);
+    if (modalContent.image) {
+      if (modalContent.image.length > 0) {
+        console.log(modalContent);
+        fetchImages(modalContent.image);
+      }
+    }
+  }, [modalContent]);
 
   const makePetitionsString = () => {
     const petitions = recentData.map(item => `${item.contenido}`).join(', ');
@@ -130,9 +132,11 @@ const AdminDashboard = () => {
             role: 'user', content: `Te daré una serie de peticiones separadas por coma, necesito que me determines en base a los
             siguientes 6 tipos de peticiones que tipo es que el que mas se repite en todas ellas, solamente devuelveme el nombre,
             los tipos son: Salud, Educacion, Economia, Familia, Espiritualidad, Trabajo, las peticiones a analizar son: ${petitions},
-            necesito que me retornes unicamente un json con title,content y conclution, en ellos colocaras como un pequeño contenido,
+            necesito que me retornes unicamente un json con title,content, image y conclution, en ellos colocaras como un pequeño contenido,
             segun el tipo de peticion que determines, como un pequeño tema que podriamos realizar para ayudar a las personas con 
-            ese tipo de peticion, recuerda, unicamente retorname ese json
+            ese tipo de peticion, recuerda, unicamente retorname ese json, el atributo imagen solamente necesito que lleve 
+            una descripcion de que tipo de imagen buscar, solamente la imagen damela en ingles, recuerda el objeto debe ser {title, content, iamge, conclution},
+            que content sea extenso por favor
           ` }],
         },
         {
@@ -146,12 +150,44 @@ const AdminDashboard = () => {
       const response = extraerJSONDelTexto(result.data.choices[0].message.content);
       setModaContent(response);
       setIsLoading(false);
-      onOpen();
     } catch (error) {
       console.error('Error al llamar a la API de OpenAI:', error);
     }
   }
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        resolve(reader.result); // Devuelve el resultado de la conversión a base64
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const fetchImages = async (img) => {
+    if (img.length < 1) return;
+    console.log(`image description: ${img}`);
+    try {
+      const Access_Key = import.meta.env.VITE_UNPLASH_API_KEY;
+      const response = await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${img}&client_id=${Access_Key}`);
+      const results = response.data.results;
+      const new_modal_content = { ...modalContent, image: results[0].urls.raw };
+      setModaContent(new_modal_content);
+      const _response = await NewsService.update(1, new_modal_content.title, new_modal_content.content, new_modal_content.conclution ?? new_modal_content.conclusion, new_modal_content.image);
+      console.log(_response);
+      // const _response = await NewsService.update();
+      onOpen();
+    } catch (error) {
+      // console.error('Error fetching images from Unsplash:', error);
+    }
+  };
   const generateVoice = () => {
     const _str_final = `Deseamos que como hermanos en cristo podamos tener en cuenta estas peticiones y asi poder orar por nuestros hermanos, 
     que Dios les bendiga, feliz sábado`;
@@ -241,10 +277,11 @@ const AdminDashboard = () => {
           <ModalHeader>{modalContent.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Image src={modalContent.image} alt='Dan Abramov' />
             {modalContent.content}
             <hr />
             <small style={{ textAlign: 'center' }}>
-              {modalContent.conclution}
+              {modalContent.conclution ?? modalContent.conclusion}
             </small>
           </ModalBody>
 
@@ -252,7 +289,6 @@ const AdminDashboard = () => {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

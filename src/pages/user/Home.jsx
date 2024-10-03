@@ -6,8 +6,22 @@ import '../../styles/Home.css'
 import img_s1 from '../../assets/images/slider_1.jpg'
 import img_s2 from '../../assets/images/slider_2.jpg'
 import img_s3 from '../../assets/images/slider_3.jpg'
+import NewsService from '../../services/news';
 
 const Home = () => {
+
+
+  const getLastNew = async () => {
+    const response = await NewsService.getAll();
+    console.log(response);
+  }
+
+
+  React.useEffect(() => {
+    getLastNew();
+  }, []);
+
+
   return (
     <div className="home">
       <div className="row m-0 p-0 section">
@@ -40,6 +54,11 @@ const Home = () => {
           <button className="btn btn-primary">Conocer Más</button>
         </div>
       </div>
+
+      <div className='container section-below'>
+        <h2 className='text-center'>NEWS</h2>
+      </div>
+
       <div className="container section-below mb-4">
         <div className="row">
           <div className="col-md-12">
