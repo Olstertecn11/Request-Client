@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useToast, Tag, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, Box, Text, Input, Flex, Stack, Divider, AbsoluteCenter, useDisclosure } from "@chakra-ui/react";
+import { Icon, useToast, Tag, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, Box, Text, Input, Flex, Stack, Divider, AbsoluteCenter, useDisclosure } from "@chakra-ui/react";
 import PetitionCard from "../../components/admin/PetitionCard";
 import Loader from "../../components/common/Loader";
 import PetitionService from "../../services/PetitionService";
@@ -15,6 +15,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import { FaFilePdf } from "react-icons/fa";
+import { useRef } from "react";
+import { usePDF } from "react-to-pdf";
 
 
 // Types Peticiones:  Salud, Educacion, Economia, Familia, Espiritualidad, Trabajo
@@ -39,6 +42,8 @@ const AdminDashboard = () => {
 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toPDF, targetRef } = usePDF({ filename: 'Peticiones.pdf' });
+
 
   const createWeek = async () => {
     const response = await SemanaService.create();
@@ -270,7 +275,7 @@ const AdminDashboard = () => {
               </Flex>
 
               <Heading size="md" mb={4}>Peticiones recientes (últimos 8 días) {week ? getWeekDate() : ''}</Heading>
-              <SimpleGrid columns={[1, 2, 3]} spacing={6} bg={'gray.100'} p={4} maxH={'860px'} overflowY={'auto'} borderRadius={8}>
+              <SimpleGrid columns={[1, 2, 3]} spacing={6} bg={'gray.100'} p={4} maxH={'860px'} overflowY={'auto'} borderRadius={8} ref={targetRef}>
 
                 {recentData && recentData.length !== 0 ? (
                   recentData.map((item, index) => (
@@ -285,9 +290,10 @@ const AdminDashboard = () => {
                 {!week || week.length === 0 ?
                   <Button bg="yellow.600" _hover={{ bg: 'yellow.500' }} color='white' mt={4} onClick={createWeek}>Generar Semana</Button> : ''
                 }
-                <Button bg="blue.100" mt={4} onClick={changeStatus}>Peticiones Atendidas</Button>
+                <Button bg="blue.100" mt={4} onClick={changeStatus}>Validar Peticiones</Button>
                 <Button bg="green.400" color='white' _hover={{ bg: 'green.600', color: 'white' }} mt={4} onClick={makePetitionsString}>Realizar Análisis</Button>
                 <Button bg="teal.400" color='white' _hover={{ bg: 'teal.600', color: 'white' }} mt={4} onClick={generateVoice}>Leer Peticiones</Button>
+                <Button bg="red.400" color='white' _hover={{ bg: 'teal.600', color: 'white' }} mt={4} onClick={() => toPDF()}> <Icon as={FaFilePdf} mr={2} />Exportar</Button>
               </Stack>
 
               <Box position='relative' padding='10'>
@@ -297,7 +303,7 @@ const AdminDashboard = () => {
                 </AbsoluteCenter>
               </Box>
               <Heading size="md" mt={8} mb={4}>Peticiones anteriores</Heading>
-              <SimpleGrid columns={[1, 2, 3]} spacing={6} >
+              <SimpleGrid columns={[1, 2, 3]} spacing={6}  >
                 {currentItems && currentItems.length !== 0 ? (
                   currentItems.map((item, index) => (
                     <PetitionCard key={index} name={item.nombre} description={item.contenido} date={item.fecha} />
